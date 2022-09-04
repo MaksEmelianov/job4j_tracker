@@ -1,6 +1,5 @@
 package ru.job4j.opp;
 
-import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
 public class Triangle {
