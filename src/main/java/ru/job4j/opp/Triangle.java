@@ -8,7 +8,6 @@ public class Triangle {
     private Point second;
     private Point third;
 
-
     public Triangle(Point first, Point second, Point third) {
         this.first = first;
         this.second = second;
