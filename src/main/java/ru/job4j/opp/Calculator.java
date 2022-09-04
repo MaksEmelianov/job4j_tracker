@@ -27,7 +27,7 @@ public class Calculator {
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
         int rsl;
-        rsl= sum(5);
+        rsl = sum(5);
         rsl = calculator.multiply(5);
         rsl = minus(5);
         rsl = calculator.divide(5);
