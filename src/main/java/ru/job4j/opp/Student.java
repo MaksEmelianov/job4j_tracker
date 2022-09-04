@@ -4,14 +4,15 @@ public class Student {
 
     public static void main(String[] args) {
         Student petya = new Student();
+        String text = "Tra tra tra";
         for (int i = 0; i < 3; i++) {
             petya.song();
-            petya.music();
+            petya.music(text);
         }
     }
 
-    public void music() {
-        System.out.println("Tra tra tra");
+    public void music(String text) {
+        System.out.println("I can sign a song : " + text);
     }
 
     public void song() {
