@@ -52,11 +52,24 @@ public class Tracker {
     }
 
     private int indexOf(int id) {
+        boolean flag = items[0] != null;
         for (int index = 0; index < items.length; index++) {
-            if (items[index].getId() == id) {
+            if (flag && items[index].getId() == id) {
                 return index;
             }
         }
         return -1;
+    }
+
+    public boolean delete(int id) {
+        int index = indexOf(id);
+        if (index != -1) {
+            items[index] = null;
+            System.arraycopy(items, index + 1, items, index, size - index - 1);
+            items[size - 1] = null;
+            size--;
+            return true;
+        }
+        return false;
     }
 }

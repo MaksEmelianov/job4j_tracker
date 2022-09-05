@@ -67,4 +67,40 @@ public class TrackerTest {
         tracker.replace(id, bugWithDesc);
         assertThat(tracker.findById(id).getName()).isEqualTo("Bug with description");
     }
+
+    @Test
+    void whenDeleteOneItem() {
+        Tracker tracker = new Tracker();
+        Item bug = new Item("Bug");
+        tracker.add(bug);
+        int id = bug.getId();
+        tracker.delete(id);
+        assertThat(tracker.findById(id)).isNull();
+    }
+
+    @Test
+    void whenDeleteTwoItems() {
+        Tracker tracker = new Tracker();
+        Item item1 = new Item("Item1");
+        Item item2 = new Item("Item2");
+        tracker.add(item1);
+        tracker.add(item2);
+        int id = item1.getId();
+        tracker.delete(id);
+        assertThat(tracker.findAll()[0]).isEqualTo(item2);
+    }
+
+    @Test
+    void whenDeleteThreeItems() {
+        Tracker tracker = new Tracker();
+        Item item1 = new Item("Item1");
+        Item item2 = new Item("Item2");
+        Item item3 = new Item("Item3");
+        tracker.add(item1);
+        tracker.add(item2);
+        tracker.add(item3);
+        int id = item1.getId();
+        tracker.delete(id);
+        assertThat(tracker.findAll()[1]).isEqualTo(item3);
+    }
 }
