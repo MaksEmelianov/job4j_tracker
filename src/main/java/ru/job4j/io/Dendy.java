@@ -14,7 +14,7 @@ public class Dendy {
             System.out.print("Введите пункт меню, чтобы начать игру: ");
             int select = Integer.parseInt(in.nextLine());
             if (select == 3) {
-                System.out.println("Игра завершена.");
+                System.out.println("Игра завершена. Выход.");
                 run = false;
             } else if (select == 1) {
                 System.out.println("Танчики загружаются ... ");
