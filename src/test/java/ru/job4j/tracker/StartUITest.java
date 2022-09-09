@@ -136,4 +136,26 @@ class StartUITest {
                         + "=== Exit Program ===" + ln
         );
     }
+
+    @Test
+    void whenInvalidExit() {
+        Tracker tracker = new Tracker();
+        Output output = new StubOutput();
+        Input input = new StubInput(
+                new String[]{"1", "0"}
+        );
+        UserAction[] actions = {
+                new Exit(output)
+        };
+        new StartUI(output).init(input, tracker, actions);
+        String ln = System.lineSeparator();
+        assertThat(output.toString()).isEqualTo(
+                "Menu:" + ln
+                        + "0. Exit Program" + ln
+                        + "Wrong input, you can select: 0 .. 0" + ln
+                        + "Menu:" + ln
+                        + "0. Exit Program" + ln
+                        + "=== Exit Program ===" + ln
+        );
+    }
 }
