@@ -30,11 +30,13 @@ public class ValidateInputTest {
     void whenManyValidInput() {
         Output output = new StubOutput();
         Input input = new StubInput(
-                new String[]{"o", "12", "1"}
+                new String[]{"o", "12", "!", "2"}
         );
         ValidateInput validateInput = new ValidateInput(output, input);
         int selected = validateInput.askInt("Enter menu:");
         assertThat(selected).isEqualTo(12);
+        selected = validateInput.askInt("Enter menu:");
+        assertThat(selected).isEqualTo(2);
     }
 
     @Test
