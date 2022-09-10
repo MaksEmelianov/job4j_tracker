@@ -8,7 +8,7 @@ public class PasswordValidatorTest {
 
     @Test
     void whenValid() {
-        String in = "admiiiiiiiiI1n";
+        String in = "admiiiiiiiiI1n!";
         String out = PasswordValidator.validate(in);
         String expected = "Пароль валидный";
         assertThat(out).isEqualTo(expected);
