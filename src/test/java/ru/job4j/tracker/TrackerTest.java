@@ -1,6 +1,9 @@
 package ru.job4j.tracker;
 
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TrackerTest {
@@ -21,8 +24,8 @@ public class TrackerTest {
         Item item2 = new Item("Item2");
         tracker.add(item1);
         tracker.add(item2);
-        Item result1 = tracker.findAll()[0];
-        Item result2 = tracker.findAll()[1];
+        Item result1 = tracker.findAll().get(0);
+        Item result2 = tracker.findAll().get(1);
         assertThat(result1.getName()).isEqualTo(item1.getName());
         assertThat(result2.getName()).isEqualTo(item2.getName());
     }
@@ -37,8 +40,8 @@ public class TrackerTest {
         tracker.add(new Item("Item1"));
         tracker.add(new Item("Item2"));
         tracker.add(new Item("Item1"));
-        Item[] result = tracker.findByName(item1.getName());
-        assertThat(result.length).isEqualTo(3);
+        List<Item> result = tracker.findByName(item1.getName());
+        assertThat(result.size()).isEqualTo(3);
     }
 
     @Test
@@ -51,8 +54,8 @@ public class TrackerTest {
         tracker.add(new Item("Item1"));
         tracker.add(new Item("Item2"));
         tracker.add(new Item("Item1"));
-        Item[] result = tracker.findByName(item2.getName());
-        assertThat(result[0].getName()).isEqualTo(item2.getName());
+        List<Item> result = tracker.findByName(item2.getName());
+        assertThat(result.get(0).getName()).isEqualTo(item2.getName());
     }
 
     @Test
@@ -87,7 +90,7 @@ public class TrackerTest {
         tracker.add(item2);
         int id = item1.getId();
         tracker.delete(id);
-        assertThat(tracker.findAll()[0]).isEqualTo(item2);
+        assertThat(tracker.findAll().get(0)).isEqualTo(item2);
     }
 
     @Test
@@ -101,6 +104,6 @@ public class TrackerTest {
         tracker.add(item3);
         int id = item1.getId();
         tracker.delete(id);
-        assertThat(tracker.findAll()[1]).isEqualTo(item3);
+        assertThat(tracker.findAll().get(1)).isEqualTo(item3);
     }
 }
