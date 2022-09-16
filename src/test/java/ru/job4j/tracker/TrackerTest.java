@@ -1,12 +1,16 @@
 package ru.job4j.tracker;
 
+import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TrackerTest {
+
     @Test
     void whenAddNewItemThenTrackerHasSameItem() {
         Tracker tracker = new Tracker();
@@ -105,5 +109,45 @@ public class TrackerTest {
         int id = item1.getId();
         tracker.delete(id);
         assertThat(tracker.findAll().get(1)).isEqualTo(item3);
+    }
+
+    @Test
+    void whenTestFindAllAscSort() {
+        List<Item> items = new ArrayList<>(
+                List.of(
+                new Item("Item3"),
+                new Item("Item2"),
+                new Item("Item5"),
+                new Item("Item6")
+        ));
+        items.sort(new ItemAscByName());
+        List<Item> expected = new ArrayList<>(
+                List.of(
+                        new Item("Item2"),
+                        new Item("Item3"),
+                        new Item("Item5"),
+                        new Item("Item6")
+                ));
+        assertThat(items).isEqualTo(expected);
+    }
+
+    @Test
+    void whenTestFindAllDescSort() {
+        List<Item> items = new ArrayList<>(
+                List.of(
+                new Item("Item3"),
+                new Item("Item2"),
+                new Item("Item5"),
+                new Item("Item6")
+        ));
+        items.sort(new ItemDescByName());
+        List<Item> expected = new ArrayList<>(
+                List.of(
+                        new Item("Item6"),
+                        new Item("Item5"),
+                        new Item("Item3"),
+                        new Item("Item2")
+                ));
+        assertThat(items).isEqualTo(expected);
     }
 }
