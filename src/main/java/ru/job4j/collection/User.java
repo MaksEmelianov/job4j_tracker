@@ -32,7 +32,6 @@ public class User implements Comparable<User> {
     @Override
     public int compareTo(User o) {
         int nameCom = name.compareTo(o.name);
-        int ageCom = Integer.compare(age, o.age);
-        return nameCom == 0 ? ageCom : nameCom;
+        return nameCom == 0 ? Integer.compare(age, o.age) : nameCom;
     }
 }
