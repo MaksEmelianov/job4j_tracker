@@ -11,13 +11,10 @@ public class StringCompare implements Comparator<String> {
         for (int index = 0; index < size; index++) {
             int compareChar = Character.compare(o1.charAt(index), o2.charAt(index));
             if (compareChar != 0) {
-                rsl = Integer.compare(o1.charAt(index), o2.charAt(index));
+                rsl = Integer.compare(compareChar, 0);
                 break;
             }
         }
-        if (o1.length() != o2.length() && rsl == 0) {
-            rsl = Integer.compare(o1.length(), o2.length());
-        }
-        return rsl;
+        return rsl == 0 ? Integer.compare(o1.length(), o2.length()) : rsl;
     }
 }
