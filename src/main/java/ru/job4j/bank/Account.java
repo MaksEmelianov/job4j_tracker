@@ -2,8 +2,18 @@ package ru.job4j.bank;
 
 import java.util.Objects;
 
+/**
+ * Класс описывает модель банковского счета клиента банка,
+ * эта модель содержит поля: реквизитов и баланс.
+ * Для доступа к полям были созданы геттеры и сеттеры.
+ * @author Maks Emelianov
+ * @version 1.0
+ */
 public class Account {
 
+    /**
+     * Хранение данных осуществляется в @param requisite и @param balance
+     */
     private String requisite;
     private double balance;
 

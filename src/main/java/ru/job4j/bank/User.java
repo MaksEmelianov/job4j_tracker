@@ -2,8 +2,18 @@ package ru.job4j.bank;
 
 import java.util.Objects;
 
+/**
+ * Класс описывает модель пользователя банка,
+ * эта модель содержит поля: паспорт и юзернейм.
+ * Для доступа к полям были созданы геттеры и сеттеры.
+ * @author Maks Emelianov
+ * @version 1.0
+ */
 public class User {
 
+    /**
+     * Хранение данных осуществляется в @param passport и @param username
+     */
     private String passport;
     private String username;
 
