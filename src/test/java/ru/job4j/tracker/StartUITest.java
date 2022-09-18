@@ -2,6 +2,7 @@ package ru.job4j.tracker;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,7 +36,7 @@ class StartUITest {
         Input input = new StubInput(
                 new String[]{"0", String.valueOf(item.getId()), newName, "1"}
         );
-        List<UserAction> actions = List.of(
+        List<UserAction> actions = Arrays.asList(
                 new ReplaceAction(output),
                 new Exit(output)
         );
@@ -62,7 +63,7 @@ class StartUITest {
         Input input = new StubInput(
                 new String[]{"0", "1"}
         );
-        List<UserAction> actions = List.of(
+        List<UserAction> actions = Arrays.asList(
                 new FindAllAction(output),
                 new Exit(output)
         );
@@ -85,12 +86,11 @@ class StartUITest {
     void whenFindByNameActionTestOutputIsSuccessfully() {
         Tracker tracker = new Tracker();
         Output output = new StubOutput();
-        Item item1 = tracker.add(new Item("Item1"));
         Item item2 = tracker.add(new Item("Item2"));
         Input input = new StubInput(
                 new String[]{"0", item2.getName(), "1"}
         );
-        List<UserAction> actions = List.of(
+        List<UserAction> actions = Arrays.asList(
                 new FindByNameAction(output),
                 new Exit(output)
         );
@@ -113,12 +113,11 @@ class StartUITest {
     void whenFindByIdActionTestOutputIsSuccessfully() {
         Tracker tracker = new Tracker();
         Output output = new StubOutput();
-        Item item1 = tracker.add(new Item("Item1"));
         Item item2 = tracker.add(new Item("Item2"));
         Input input = new StubInput(
                 new String[]{"0", String.valueOf(item2.getId()), "1"}
         );
-        List<UserAction> actions = List.of(
+        List<UserAction> actions = Arrays.asList(
                 new FindByIdAction(output),
                 new Exit(output)
         );
