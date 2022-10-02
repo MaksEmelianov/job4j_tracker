@@ -1,6 +1,7 @@
 package ru.job4j.collection;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 public class Departments {
 
@@ -16,11 +17,18 @@ public class Departments {
         return new ArrayList<>(tmp);
     }
 
-    public static void sortAsc(List<String> args) {
-        args.sort(Comparator.naturalOrder());
+    public static List<String> sortAsc(List<String> args) {
+        return args.stream()
+                .flatMap(Stream::ofNullable)
+                .sorted(Comparator.naturalOrder())
+                .toList();
+
     }
 
-    public static void sortDesc(List<String> args) {
-        args.sort(new DepDescComp());
+    public static List<String> sortDesc(List<String> args) {
+        return args.stream()
+                .flatMap(Stream::ofNullable)
+                .sorted(new DepDescComp())
+                .toList();
     }
 }
