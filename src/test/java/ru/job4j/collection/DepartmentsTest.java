@@ -11,7 +11,7 @@ public class DepartmentsTest {
 
     @Test
     void whenMissed() {
-        List<String> in = List.of("k1/sk1", "k2/sk1");
+        List<String> in = Arrays.asList("k1/sk1", "k2/sk1");
         List<String> expected = List.of("k1", "k1/sk1", "k2", "k2/sk1");
         List<String> out = Departments.fillGaps(in);
         assertThat(out).containsAll(expected);
@@ -19,7 +19,7 @@ public class DepartmentsTest {
 
     @Test
     void whenMissed2() {
-        List<String> in = List.of(
+        List<String> in = Arrays.asList(
                 "K1/SK1",
                 "K1/SK2",
                 "K1/SK1/SSK1",
@@ -43,15 +43,15 @@ public class DepartmentsTest {
 
     @Test
     void whenNonChange() {
-        List<String> input = List.of("k1", "k1/sk1");
+        List<String> in = Arrays.asList("k1", "k1/sk1");
         List<String> expect = List.of("k1", "k1/sk1");
-        List<String> result = Departments.fillGaps(input);
-        assertThat(result).containsAll(expect);
+        Departments.fillGaps(in);
+        assertThat(in).containsAll(expect);
     }
 
     @Test
     void whenSortAscWithoutMissedDepartments() {
-        List<String> in = List.of(
+        List<String> in = Arrays.asList(
                 "K1/SK1",
                 "K1/SK1/SSK1",
                 "K1/SK1/SSK2",
@@ -73,13 +73,13 @@ public class DepartmentsTest {
                 "K2/SK1/SSK1",
                 "K2/SK1/SSK2"
         );
-        List<String> out = Departments.sortAsc(in);
-        assertThat(out).containsSequence(expected);
+        Departments.sortAsc(in);
+        assertThat(in).containsSequence(expected);
     }
 
     @Test
     void whenSortAscWithMissedDepartments() {
-        List<String> in = List.of(
+        List<String> in = Arrays.asList(
                 "K1/SK1/SSK1",
                 "K1/SK1/SSK2",
                 "K2/SK1",
@@ -95,13 +95,13 @@ public class DepartmentsTest {
                 "K2/SK1/SSK1",
                 "K2/SK1/SSK2"
         );
-        List<String> out = Departments.sortAsc(in);
-        assertThat(out).containsSequence(expect);
+        Departments.sortAsc(in);
+        assertThat(in).containsSequence(expect);
     }
 
     @Test
     void whenSortDescWithoutMissedDepartments() {
-        List<String> in = List.of(
+        List<String> in = Arrays.asList(
                 "K1/SK1",
                 "K1/SK1/SSK1",
                 "K1/SK1/SSK2",
@@ -123,13 +123,13 @@ public class DepartmentsTest {
                 "K1/SK1/SSK2",
                 "K1/SK2"
         );
-        List<String> out = Departments.sortDesc(in);
-        assertThat(out).containsSequence(expect);
+        Departments.sortDesc(in);
+        assertThat(in).containsSequence(expect);
     }
 
     @Test
     void whenSortDescWithMissedDepartments() {
-        List<String> in = List.of(
+        List<String> in = Arrays.asList(
                 "K1/SK1",
                 "K1/SK1/SSK1",
                 "K1/SK1/SSK2",
@@ -147,7 +147,7 @@ public class DepartmentsTest {
                 "K1/SK1/SSK2",
                 "K1/SK2"
         );
-        List<String> out = Departments.sortDesc(in);
-        assertThat(out).containsSequence(expect);
+        Departments.sortDesc(in);
+        assertThat(in).containsSequence(expect);
     }
 }

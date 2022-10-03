@@ -17,18 +17,12 @@ public class Departments {
         return new ArrayList<>(tmp);
     }
 
-    public static List<String> sortAsc(List<String> args) {
-        return args.stream()
-                .flatMap(Stream::ofNullable)
-                .sorted(Comparator.naturalOrder())
-                .toList();
+    public static void sortAsc(List<String> args) {
+        args.sort(Comparator.naturalOrder());
 
     }
 
-    public static List<String> sortDesc(List<String> args) {
-        return args.stream()
-                .flatMap(Stream::ofNullable)
-                .sorted(new DepDescComp())
-                .toList();
+    public static void sortDesc(List<String> args) {
+        args.sort(new DepDescComp());
     }
 }
