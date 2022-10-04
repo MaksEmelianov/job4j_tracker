@@ -10,7 +10,7 @@ public class PhoneDictionaryTest {
 
     @Test
     void whenCheckFindByName() {
-        PhoneDictionary phones = new PhoneDictionary();
+        var phones = new PhoneDictionary();
         phones.add(
                 new Person("Ivan", "Ivanov", "+79999999999", "RF")
         );
@@ -20,7 +20,7 @@ public class PhoneDictionaryTest {
 
     @Test
     void whenCheckFindBySurName() {
-        PhoneDictionary phones = new PhoneDictionary();
+        var phones = new PhoneDictionary();
         phones.add(
                 new Person("Ivan", "Petrov", "+79999999999", "RF")
         );
@@ -33,7 +33,7 @@ public class PhoneDictionaryTest {
 
     @Test
     void whenNoFindBPersonByName() {
-        PhoneDictionary phones = new PhoneDictionary();
+        var phones = new PhoneDictionary();
         phones.add(new Person("Ivan", "Petrov", "+79999999999", "RF"));
         ArrayList<Person> persons = phones.find("Misha");
         assertThat(persons.isEmpty()).isTrue();
@@ -41,7 +41,7 @@ public class PhoneDictionaryTest {
 
     @Test
     void whenFindByName() {
-        PhoneDictionary phones = new PhoneDictionary();
+        var phones = new PhoneDictionary();
         phones.add(
                 new Person("Petr", "Arsentev", "534872", "Bryansk")
         );
