@@ -51,7 +51,7 @@ public class AnalyzeByMap {
                 countSub++;
                 for (var sub : pupil.subjects()) {
                     sumScore = map.get(sub.nameSub()) != null ? map.get(sub.nameSub()) : 0;
-                    map.put(sub.nameSub(), sumScore += sub.score());
+                    map.put(sub.nameSub(), sumScore + sub.score());
                 }
             }
             for (var entry : map.entrySet()) {
@@ -94,7 +94,7 @@ public class AnalyzeByMap {
                 countSub++;
                 for (var sub : pupil.subjects()) {
                     sumScore = map.get(sub.nameSub()) != null ? map.get(sub.nameSub()) : 0;
-                    map.put(sub.nameSub(), sumScore += sub.score());
+                    map.put(sub.nameSub(), sumScore + sub.score());
                 }
             }
             List<Label> tmp = new ArrayList<>();
