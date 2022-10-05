@@ -101,7 +101,7 @@ public class CollegeTest {
                 )
         );
         College college = new College(students);
-        assertThat(college.findBySubjectName("000001", "Math").get().getScore())
+        assertThat(college.findBySubjectName("000001", "Math").get().score())
                 .isEqualTo(70);
     }
 }
