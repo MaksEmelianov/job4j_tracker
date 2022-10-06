@@ -23,11 +23,9 @@ public class AnalyzeByMap {
     public static List<Label> averageScoreByPupil(List<Pupil> pupils) {
         List<Label> rsl = new ArrayList<>();
         if (!pupils.isEmpty()) {
-            int countSub = 0;
-            int sumScore = 0;
             for (var pupil : pupils) {
-                countSub = 0;
-                sumScore = 0;
+                int countSub = 0;
+                int sumScore = 0;
                 for (var sub : pupil.subjects()) {
                     countSub++;
                     sumScore += sub.score();
@@ -46,25 +44,16 @@ public class AnalyzeByMap {
         if (!pupils.isEmpty()) {
             Map<String, Integer> map = new LinkedHashMap<>();
             int countSub = 0;
-//            int sumScore = 0;
             for (var pupil : pupils) {
                 countSub++;
                 for (var sub : pupil.subjects()) {
-                    /*
-//                    sumScore = map.get(sub.nameSub()) == null ? 0 : map.get(sub.nameSub());
-//                    map.put(sub.nameSub(), sumScore + sub.score());
-
-                      map.compute(sub.nameSub(), (name, prev) -> prev != null ? prev + sub.score() : sub.score());
-                      ||
-                      \/
-                    */
                     map.merge(sub.nameSub(), sub.score(), Integer::sum);
                 }
             }
             for (var entry : map.entrySet()) {
                 rsl.add(
                         new Label(entry.getKey(),
-                                countSub == 0 /*|| sumScore == 0*/ ? Double.NaN : (double) entry.getValue() / countSub)
+                                countSub == 0 ? Double.NaN : (double) entry.getValue() / countSub)
                 );
             }
         }
@@ -96,12 +85,10 @@ public class AnalyzeByMap {
         if (!pupils.isEmpty()) {
             Map<String, Integer> map = new LinkedHashMap<>();
             int countSub = 0;
-            int sumScore = 0;
             for (var pupil : pupils) {
                 countSub++;
                 for (var sub : pupil.subjects()) {
-                    sumScore = map.get(sub.nameSub()) != null ? map.get(sub.nameSub()) : 0;
-                    map.put(sub.nameSub(), sumScore + sub.score());
+                    map.merge(sub.nameSub(), sub.score(), Integer::sum);
                 }
             }
             List<Label> tmp = new ArrayList<>();
