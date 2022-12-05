@@ -1,6 +1,6 @@
 package ru.job4j.tracker;
 
-import ru.job4j.tracker.store.MemTracker;
+import ru.job4j.tracker.store.Store;
 
 public class Exit implements UserAction {
 
@@ -16,7 +16,7 @@ public class Exit implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, MemTracker tracker) {
+    public boolean execute(Input input, Store tracker) {
         output.println("=== Exit Program ===");
         return false;
     }
