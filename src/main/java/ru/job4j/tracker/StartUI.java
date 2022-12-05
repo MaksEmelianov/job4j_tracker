@@ -39,16 +39,19 @@ public class StartUI {
     public static void main(String[] args) {
         Output out = new ConsoleOutput();
         Input input = new ValidateInput(out, new ConsoleInput());
-        Store tracker = new SqlTracker();
-        List<UserAction> actions = Arrays.asList(
-                new CreateAction(out),
-                new ReplaceAction(out),
-                new DeleteAction(out),
-                new FindAllAction(out),
-                new FindByIdAction(out),
-                new FindByNameAction(out),
-                new Exit(out)
-        );
-        new StartUI(out).init(input, tracker, actions);
+        try (Store tracker = new SqlTracker()) {
+            List<UserAction> actions = Arrays.asList(
+                    new CreateAction(out),
+                    new ReplaceAction(out),
+                    new DeleteAction(out),
+                    new FindAllAction(out),
+                    new FindByIdAction(out),
+                    new FindByNameAction(out),
+                    new Exit(out)
+            );
+            new StartUI(out).init(input, tracker, actions);
+        } catch (Exception e) {
+            throw new IllegalStateException("Error close tracker");
+        }
     }
 }
