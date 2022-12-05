@@ -1,7 +1,6 @@
 package ru.job4j.tracker.store;
 
 import ru.job4j.tracker.Item;
-import ru.job4j.tracker.store.Store;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +66,7 @@ public class MemTracker implements Store {
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() {
         if (!items.isEmpty()) {
             items.clear();
         }
