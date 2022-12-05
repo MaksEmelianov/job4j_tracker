@@ -1,10 +1,9 @@
 package ru.job4j.tracker;
 
-import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.Test;
+import ru.job4j.tracker.store.MemTracker;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,7 +12,7 @@ public class TrackerTest {
 
     @Test
     void whenAddNewItemThenTrackerHasSameItem() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item = new Item();
         item.setName("test1");
         tracker.add(item);
@@ -23,7 +22,7 @@ public class TrackerTest {
 
     @Test
     void whenTestFindAll() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item1 = new Item("Item1");
         Item item2 = new Item("Item2");
         tracker.add(item1);
@@ -36,7 +35,7 @@ public class TrackerTest {
 
     @Test
     void whenTestFindByNameCheckArrayLength() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item1 = new Item("Item1");
         Item item2 = new Item("Item2");
         tracker.add(item1);
@@ -50,7 +49,7 @@ public class TrackerTest {
 
     @Test
     void whenTestFindByNameCheckSecondNameItem() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item1 = new Item("Item1");
         Item item2 = new Item("Item2");
         tracker.add(item1);
@@ -64,7 +63,7 @@ public class TrackerTest {
 
     @Test
     void whenReplace() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item bug = new Item();
         bug.setName("Bug");
         tracker.add(bug);
@@ -77,7 +76,7 @@ public class TrackerTest {
 
     @Test
     void whenDeleteOneItem() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item bug = new Item("Bug");
         tracker.add(bug);
         int id = bug.getId();
@@ -87,7 +86,7 @@ public class TrackerTest {
 
     @Test
     void whenDeleteTwoItems() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item1 = new Item("Item1");
         Item item2 = new Item("Item2");
         tracker.add(item1);
@@ -99,7 +98,7 @@ public class TrackerTest {
 
     @Test
     void whenDeleteThreeItems() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item1 = new Item("Item1");
         Item item2 = new Item("Item2");
         Item item3 = new Item("Item3");

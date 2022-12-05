@@ -7,8 +7,14 @@ import java.util.Objects;
 public class Item implements Comparable<Item> {
     private int id;
     private String name;
-    private final LocalDateTime now = LocalDateTime.now();
+    private LocalDateTime now = LocalDateTime.now();
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+
+    public Item(int id, String name, LocalDateTime now) {
+        this.id = id;
+        this.name = name;
+        this.now = now;
+    }
 
     public Item(int id, String name) {
         this.id = id;

@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
 import org.junit.jupiter.api.Test;
+import ru.job4j.tracker.store.MemTracker;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +16,7 @@ class StartUITest {
                 new String[]{"0"}
         );
         Output output = new StubOutput();
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         List<UserAction> actions = List.of(
                 new Exit(output)
         );
@@ -29,7 +30,7 @@ class StartUITest {
 
     @Test
     void whenReplaceItemTestOutputIsSuccessfully() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Output output = new StubOutput();
         String newName = "New Item";
         Item item = tracker.add(new Item("Item"));
@@ -57,7 +58,7 @@ class StartUITest {
 
     @Test
     void whenFindAllActionTestOutputIsSuccessfully() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Output output = new StubOutput();
         Item item = tracker.add(new Item("Item1"));
         Input input = new StubInput(
@@ -84,7 +85,7 @@ class StartUITest {
 
     @Test
     void whenFindByNameActionTestOutputIsSuccessfully() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Output output = new StubOutput();
         Item item2 = tracker.add(new Item("Item2"));
         Input input = new StubInput(
@@ -111,7 +112,7 @@ class StartUITest {
 
     @Test
     void whenFindByIdActionTestOutputIsSuccessfully() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Output output = new StubOutput();
         Item item2 = tracker.add(new Item("Item2"));
         Input input = new StubInput(
@@ -138,7 +139,7 @@ class StartUITest {
 
     @Test
     void whenInvalidExit() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Output output = new StubOutput();
         Input input = new StubInput(
                 new String[]{"1", "0"}

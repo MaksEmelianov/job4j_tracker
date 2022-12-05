@@ -1,9 +1,12 @@
-package ru.job4j.tracker;
+package ru.job4j.tracker.store;
+
+import ru.job4j.tracker.Item;
+import ru.job4j.tracker.store.Store;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tracker {
+public class MemTracker implements Store {
 
     private final List<Item> items = new ArrayList<>();
     private int ids = 1;
@@ -61,5 +64,12 @@ public class Tracker {
             }
         }
         return rsl;
+    }
+
+    @Override
+    public void close() throws Exception {
+        if (!items.isEmpty()) {
+            items.clear();
+        }
     }
 }
