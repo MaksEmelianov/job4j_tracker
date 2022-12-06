@@ -50,7 +50,7 @@ public class StartUI {
             );
             new StartUI(out).init(input, tracker, actions);
         } catch (Exception e) {
-            e.printStackTrace();
+            SqlTracker.logging();
         }
     }
 }

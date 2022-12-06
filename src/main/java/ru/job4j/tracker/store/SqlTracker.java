@@ -1,5 +1,7 @@
 package ru.job4j.tracker.store;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import ru.job4j.tracker.Item;
 
 import java.io.IOException;
@@ -10,6 +12,8 @@ import java.util.List;
 import java.util.Properties;
 
 public class SqlTracker implements Store {
+
+    public static final Logger LOG = LogManager.getLogger(SqlTracker.class.getName());
 
     private Connection connection;
 
@@ -52,10 +56,16 @@ public class SqlTracker implements Store {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logging();
             throw new IllegalStateException("Error add item");
         }
         return result;
+    }
+
+    public static void logging() {
+        LOG.trace("Trace message");
+        LOG.error("Error message");
+        LOG.warn("Warn message");
     }
 
     @Override
@@ -68,7 +78,7 @@ public class SqlTracker implements Store {
             statement.setInt(3, id);
             result = statement.executeUpdate() == 1;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logging();
             throw new IllegalStateException("Error replace item");
         }
         return result;
@@ -82,7 +92,7 @@ public class SqlTracker implements Store {
             statement.setInt(1, id);
             result = statement.executeUpdate() == 1;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logging();
             throw new IllegalStateException("Error delete item");
         }
         return result;
@@ -97,7 +107,7 @@ public class SqlTracker implements Store {
                 result.add(getItem(rs));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logging();
             throw new IllegalStateException("Error find all items");
         }
         return result;
@@ -114,7 +124,7 @@ public class SqlTracker implements Store {
                 result.add(getItem(rs));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logging();
             throw new IllegalStateException("Error find by name item");
         }
         return result;
@@ -138,7 +148,7 @@ public class SqlTracker implements Store {
                 result = getItem(rs);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logging();
             throw new IllegalStateException("Error find by id item");
         }
         return result;
