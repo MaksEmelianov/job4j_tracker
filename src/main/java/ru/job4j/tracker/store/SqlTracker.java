@@ -11,7 +11,6 @@ import java.util.Properties;
 
 public class SqlTracker implements Store {
 
-    private final static String TABLE_NAME = "items";
     private Connection connection;
 
     public SqlTracker() {
@@ -42,11 +41,10 @@ public class SqlTracker implements Store {
     public Item add(Item item) {
         Item result;
         try (PreparedStatement statement = connection
-                .prepareStatement("insert into ? (name, time) values (?, ?);",
+                .prepareStatement("insert into items (name, created) values (?, ?);",
                              Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(1, TABLE_NAME);
-            statement.setString(2, item.getName());
-            statement.setTimestamp(3, Timestamp.valueOf(item.getNow()));
+            statement.setString(1, item.getName());
+            statement.setTimestamp(2, Timestamp.valueOf(item.getNow()));
             result = statement.executeUpdate() == 1 ? item : null;
             try (var keys = statement.getGeneratedKeys()) {
                 if (keys.next()) {
@@ -54,6 +52,7 @@ public class SqlTracker implements Store {
                 }
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new IllegalStateException("Error add item");
         }
         return result;
@@ -63,13 +62,13 @@ public class SqlTracker implements Store {
     public boolean replace(int id, Item item) {
         boolean result;
         try (PreparedStatement statement = connection
-                .prepareStatement("update ? set name = ?, time = ? where id = ?;")) {
-            statement.setString(1, TABLE_NAME);
-            statement.setString(2, item.getName());
-            statement.setTimestamp(3, Timestamp.valueOf(item.getNow()));
-            statement.setInt(4, id);
+                .prepareStatement("update items set name = ?, created = ? where id = ?;")) {
+            statement.setString(1, item.getName());
+            statement.setTimestamp(2, Timestamp.valueOf(item.getNow()));
+            statement.setInt(3, id);
             result = statement.executeUpdate() == 1;
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new IllegalStateException("Error replace item");
         }
         return result;
@@ -79,11 +78,11 @@ public class SqlTracker implements Store {
     public boolean delete(int id) {
         boolean result;
         try (PreparedStatement statement = connection
-                .prepareStatement("delete from ? where id = ?;")) {
-            statement.setString(1, TABLE_NAME);
-            statement.setInt(2, id);
+                .prepareStatement("delete from items where id = ?;")) {
+            statement.setInt(1, id);
             result = statement.executeUpdate() == 1;
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new IllegalStateException("Error delete item");
         }
         return result;
@@ -92,13 +91,13 @@ public class SqlTracker implements Store {
     @Override
     public List<Item> findAll() {
         List<Item> result = new ArrayList<>();
-        try (PreparedStatement statement = connection.prepareStatement("select * from ?")) {
-            statement.setString(1, TABLE_NAME);
+        try (PreparedStatement statement = connection.prepareStatement("select * from items")) {
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 result.add(getItem(rs));
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new IllegalStateException("Error find all items");
         }
         return result;
@@ -108,14 +107,14 @@ public class SqlTracker implements Store {
     public List<Item> findByName(String key) {
         List<Item> result = new ArrayList<>();
         try (PreparedStatement statement =
-                     connection.prepareStatement("select * from ? where name = ?")) {
-            statement.setString(1, TABLE_NAME);
-            statement.setString(2, key);
+                     connection.prepareStatement("select * from items where name = ?")) {
+            statement.setString(1, key);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 result.add(getItem(rs));
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new IllegalStateException("Error find by name item");
         }
         return result;
@@ -132,14 +131,14 @@ public class SqlTracker implements Store {
     public Item findById(int id) {
         Item result = null;
         try (PreparedStatement statement =
-                     connection.prepareStatement("select * from ? where id = ?")) {
-            statement.setString(1, TABLE_NAME);
-            statement.setInt(2, id);
+                     connection.prepareStatement("select * from items where id = ?")) {
+            statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 result = getItem(rs);
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new IllegalStateException("Error find by id item");
         }
         return result;

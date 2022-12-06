@@ -1,6 +1,5 @@
 package ru.job4j.tracker;
 
-import ru.job4j.tracker.store.MemTracker;
 import ru.job4j.tracker.store.SqlTracker;
 import ru.job4j.tracker.store.Store;
 
@@ -51,7 +50,7 @@ public class StartUI {
             );
             new StartUI(out).init(input, tracker, actions);
         } catch (Exception e) {
-            throw new IllegalStateException("Error close tracker");
+            e.printStackTrace();
         }
     }
 }
