@@ -44,7 +44,7 @@ public class SqlTracker implements Store {
                 .prepareStatement("insert into items (name, created) values (?, ?);",
                              Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, item.getName());
-            statement.setTimestamp(2, Timestamp.valueOf(item.getNow()));
+            statement.setTimestamp(2, Timestamp.valueOf(item.getCreated()));
             result = statement.executeUpdate() == 1 ? item : null;
             try (var keys = statement.getGeneratedKeys()) {
                 if (keys.next()) {
@@ -63,7 +63,7 @@ public class SqlTracker implements Store {
         try (PreparedStatement statement = connection
                 .prepareStatement("update items set name = ?, created = ? where id = ?;")) {
             statement.setString(1, item.getName());
-            statement.setTimestamp(2, Timestamp.valueOf(item.getNow()));
+            statement.setTimestamp(2, Timestamp.valueOf(item.getCreated()));
             statement.setInt(3, id);
             result = statement.executeUpdate() == 1;
         } catch (SQLException e) {

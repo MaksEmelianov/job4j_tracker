@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import ru.job4j.tracker.store.MemTracker;
 import ru.job4j.tracker.store.Store;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,40 +114,40 @@ public class TrackerTest {
 
     @Test
     void whenTestFindAllAscSort() {
+        var time = LocalDateTime.now();
         List<Item> items = new ArrayList<>(
                 List.of(
-                new Item("Item3"),
-                new Item("Item2"),
-                new Item("Item5"),
-                new Item("Item6")
+                new Item("Item3", time),
+                new Item("Item2", time),
+                new Item("Item5", time),
+                new Item("Item6", time)
         ));
         items.sort(new ItemAscByName());
-        List<Item> expected = new ArrayList<>(
-                List.of(
-                        new Item("Item2"),
-                        new Item("Item3"),
-                        new Item("Item5"),
-                        new Item("Item6")
-                ));
+        List<Item> expected = List.of(
+                new Item("Item2", time),
+                new Item("Item3", time),
+                new Item("Item5", time),
+                new Item("Item6", time));
         assertThat(items).isEqualTo(expected);
     }
 
     @Test
     void whenTestFindAllDescSort() {
+        var time = LocalDateTime.now();
         List<Item> items = new ArrayList<>(
                 List.of(
-                new Item("Item3"),
-                new Item("Item2"),
-                new Item("Item5"),
-                new Item("Item6")
+                new Item("Item3", time),
+                new Item("Item2", time),
+                new Item("Item5", time),
+                new Item("Item6", time)
         ));
         items.sort(new ItemDescByName());
         List<Item> expected = new ArrayList<>(
                 List.of(
-                        new Item("Item6"),
-                        new Item("Item5"),
-                        new Item("Item3"),
-                        new Item("Item2")
+                        new Item("Item6", time),
+                        new Item("Item5", time),
+                        new Item("Item3", time),
+                        new Item("Item2", time)
                 ));
         assertThat(items).isEqualTo(expected);
     }
