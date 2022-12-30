@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import ru.job4j.tracker.store.HbmTracker;
 import ru.job4j.tracker.store.MemTracker;
 import ru.job4j.tracker.store.Store;
 
@@ -38,7 +39,7 @@ public class StartUI {
     public static void main(String[] args) {
         Output out = new ConsoleOutput();
         Input input = new ValidateInput(out, new ConsoleInput());
-        try (Store tracker = new MemTracker()) {
+        try (Store tracker = new HbmTracker()) {
             List<UserAction> actions = Arrays.asList(
                     new CreateAction(out),
                     new TestLoadCreateAction(out),
